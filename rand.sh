@@ -17,22 +17,24 @@ do
     if [ "$ret1" != "0" -a "$ret2" != "0" ]; then
         printf "$i," >> $out1
         c=$(($c+1))
-        if [ "$c" -ge 1000 ]; then
+        if [ "$c" -ge 6000 ]; then
             break
         fi
     fi
 done
 
-for i in `seq 8001 9000`
+for i in `seq 6001 10000`
 do
     grep $i $file1 >/dev/null 2>&1
     ret1=$?
     grep $i $file2 >/dev/null 2>&1
     ret2=$?
-    if [ "$ret1" != "0" -a "$ret2" != "0" ]; then
+    grep -r $i $file2 >/dev/null 2>&1
+    ret3=$?
+    if [ "$ret1" != "0" -a "$ret2" != "0" -a "$ret3" != "0" ]; then
         printf "$i," >> $out1
         c=$(($c+1))
-        if [ "$c" -ge 1000 ]; then
+        if [ "$c" -ge 6000 ]; then
             break
         fi
     fi
