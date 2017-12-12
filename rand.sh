@@ -23,3 +23,17 @@ do
     fi
 done
 
+for i in `seq 8001 9000`
+do
+    grep $i $file1 >/dev/null 2>&1
+    ret1=$?
+    grep $i $file2 >/dev/null 2>&1
+    ret2=$?
+    if [ "$ret1" != "0" -a "$ret2" != "0" ]; then
+        printf "$i," >> $out1
+        c=$(($c+1))
+        if [ "$c" -ge 1000 ]; then
+            break
+        fi
+    fi
+done
